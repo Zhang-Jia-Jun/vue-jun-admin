@@ -1,0 +1,8 @@
+// 全局scss代码块
+@mixin clearfix {
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  }
