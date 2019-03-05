@@ -5,6 +5,16 @@
 
 // 全局样式定义
 
-body,html{
-    
+body,html,#app{
+    height: 100vh;
+    width: 100vw;
+    // 重点！全局盒模式使用 border-box
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    // 所有元素都继承父级 盒模式
+  box-sizing: inherit;
 }
