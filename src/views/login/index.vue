@@ -3,6 +3,10 @@
     <el-form class="login-form">
       <h3 class="title">个人博客管理系统</h3>
       <el-form-item>
+        <span class="svg-container">
+          <icon icon-name="people_fill"></icon>
+        </span>
+
         <el-input placeholder="用户账号" v-model="loginAccount.username"></el-input>
       </el-form-item>
       <el-form-item>
@@ -56,11 +60,10 @@ export default {
     border-radius: 5px;
     color: #454545;
   }
-  .el-button{
-      width: 100%;
+  .el-button {
+    width: 100%;
   }
 }
-
 </style>
 
 <style lang="scss" scoped>

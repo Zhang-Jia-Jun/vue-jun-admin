@@ -1,8 +1,8 @@
 import Vue from 'vue';
 // 引入写好的icon组件
-import iconSvg from '@/component/icon-svg';
+import icon from '@/components/icon';
 // 注册到全局组件
-Vue.component('icon-svg', iconSvg)
+Vue.component('icon', icon)
 
 // 将./svg下不包括子目录的所有后缀名.svg的文件赋值给变量req
 const requireContext = require.context('./svg', false, /\.svg$/)

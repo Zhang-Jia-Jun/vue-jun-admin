@@ -16,6 +16,9 @@ import router from './router'
 // 状态仓库
 import store from './store'
 
+// 引入icons组件
+import './icons'
+
 
 Vue.config.productionTip = false
 
