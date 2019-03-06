@@ -139,6 +139,7 @@ $title-color: #eee;
       color: rgba($color: $icon-color, $alpha: 0.3);
     }
     .show-pwd {
+      cursor: pointer;
       line-height: 47px;
       font-size: 1.3rem;
       color: rgba($color: $icon-color, $alpha: 0.5);

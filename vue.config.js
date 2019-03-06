@@ -19,5 +19,13 @@ module.exports = {
         .options({
             symbolId: 'icon-[name]'
         })
-    }
+    },
+
+    publicPath: '',
+    outputDir: undefined,
+    assetsDir: undefined,
+    runtimeCompiler: undefined,
+    productionSourceMap: undefined,
+    parallel: undefined,
+    css: undefined
 }
