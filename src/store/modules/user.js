@@ -1,7 +1,8 @@
 // 登录的api接口
-import {login,getInfo,loginOut} from '@/api/login'
+import loginAPI from '@/api/login'
 // 设置token的cookie工具
-import {getToken,setToken,removeToken} from '@/utils/auth'
+import {setToken} from '@/utils/auth'
+
 
 const user = {
     state: {
@@ -9,7 +10,6 @@ const user = {
         token: '',
         // 用户名
         name: '',
-
     },
     // 操作状态
     mutations: {
@@ -23,12 +23,11 @@ const user = {
     actions: {
         // 登录操作，可执行异步操作
         // 登录到了这一步将会进行数据请求，此时编写API
-        Login({ commit }, userInfo) {
+        Login({ commit }, userInfo) { 
             // 登录为异步操作
             return new Promise((resolve, reject) => {
                 // 执行登录请求，异步操作，返回异步对象
-                login(userInfo.username,userinfo.password)
-                // 请求成功
+                loginAPI.login(userInfo.username,userInfo.password)
                 .then(response =>{
                     // 获取请求信息
                     const data = response.data;
@@ -38,7 +37,6 @@ const user = {
                     commit('SET_TOKEN',data.token)
                     resolve()
                 })
-                // 请求失败，服务器错误！
                 .catch(error =>{
                     reject(error)
                 })

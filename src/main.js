@@ -19,6 +19,9 @@ import store from './store'
 // 引入icons组件
 import './icons'
 
+// 引入mockjs,拦截请求,模拟数据
+import '../mock'
+
 
 Vue.config.productionTip = false
 

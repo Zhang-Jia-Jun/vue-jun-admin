@@ -1,8 +1,9 @@
 <template>
   <div class="login-container">
-    <!-- ref：组件ID 通过vm.$ref['ID']可获取该组件，rules：获取一个规则对象，model：获得一个作用域对象 方便el-form-item组件prop特效的使用 -->
+    <!-- ref：组件ID 通过vm.$ref['ID']可获取该组件，rules：获取一个规则对象，model：获得一个作用域对象 方便el-form-item组件prop特性的使用 -->
     <el-form ref="loginForm" class="login-form" :rules="loginRules" :model="loginAccount">
       <h3 class="title">个人博客管理系统</h3>
+      <!-- prop特性，该组件所要验证的属性 -->
       <el-form-item prop="username">
         <span class="svg-container">
           <icon icon-name="people_fill"></icon>
@@ -26,6 +27,7 @@
         </span>
       </el-form-item>
       <el-form-item>
+        <!-- loading 加载中，接收Boolean值 -->
         <el-button
           :loading="loading"
           type="primary"
@@ -43,12 +45,6 @@
 <script>
 export default {
   data() {
-    const validateUsername = (rule, value, callback) => {
-      return callback();
-    };
-    const validatePass = (rule, value, callback) => {
-      console.log(rule, value, callback);
-    };
     return {
       // 用户登录信息
       loginAccount: {
@@ -57,7 +53,7 @@ export default {
       },
       // 显示密码状态
       pwdState: false,
-      // loginRules验证规则对象 验证规则参见async-validator
+      // loginRules验证规则对象 验证规则参见 async-validator
       loginRules: {
         username: [
           { required: true, trigger: "blur", message: "请输入用户名称" },
@@ -89,9 +85,20 @@ export default {
         if (valid) {
           this.loading = true;
           // 模拟登录
-          setTimeout(() => {
-            this.loading = false;
-          }, 1500);
+          this.$store
+            .dispatch("Login", this.loginAccount)
+            .then(() => {
+              this.loading = false;
+              this.$message.success("登录成功");
+            })
+            .catch(error => {
+              this.loading = false;
+              // 业务状态码，403表示账号密码错误
+              if (error.data == 403) {
+                this.$message.error("账号密码错误");
+              }
+              console.log(error);
+            });
         }
       });
     }
