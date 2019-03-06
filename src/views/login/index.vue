@@ -1,25 +1,36 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form">
+    <!-- ref：组件ID 通过vm.$ref['ID']可获取该组件，rules：获取一个规则对象，model：获得一个作用域对象 方便el-form-item组件prop特效的使用 -->
+    <el-form ref="loginForm" class="login-form" :rules="loginRules" :model="loginAccount">
       <h3 class="title">个人博客管理系统</h3>
-      <el-form-item>
+      <el-form-item prop="username">
         <span class="svg-container">
           <icon icon-name="people_fill"></icon>
         </span>
 
-        <el-input placeholder="用户账号" v-model="loginAccount.username"></el-input>
+        <el-input placeholder="用户账号" name="username" v-model="loginAccount.username"></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item prop="password">
         <span class="svg-container">
           <icon icon-name="lock_fill"></icon>
         </span>
-        <el-input placeholder="用户密码" v-model="loginAccount.password" :type="this.pwdState ? '' : 'password'"></el-input>
+        <el-input
+          placeholder="用户密码"
+          name="password"
+          v-model="loginAccount.password"
+          :type="this.pwdState ? '' : 'password'"
+          @keyup.enter.native="validateLogin()"
+        ></el-input>
         <span class="show-pwd" @click="showPwd()">
           <icon :icon-name="this.pwdState ? 'eye':'eye-close'"></icon>
         </span>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary">Sign in</el-button>
+        <el-button
+          :loading="loading"
+          type="primary"
+          @click.native.prevent="validateLogin()"
+        >{{loadMsg}}</el-button>
       </el-form-item>
       <div class="tips">
         <span style="margin-right:20px;">username: admin</span>
@@ -32,32 +43,67 @@
 <script>
 export default {
   data() {
+    const validateUsername = (rule, value, callback) => {
+      return callback();
+    };
+    const validatePass = (rule, value, callback) => {
+      console.log(rule, value, callback);
+    };
     return {
+      // 用户登录信息
       loginAccount: {
         username: "admin",
         password: "admin"
       },
-      pwdState:false,
+      // 显示密码状态
+      pwdState: false,
+      // loginRules验证规则对象 验证规则参见async-validator
+      loginRules: {
+        username: [
+          { required: true, trigger: "blur", message: "请输入用户名称" },
+          { min: 3, max: 5, trigger: "blur", message: "长度在 3 到 5 个字符" }
+        ],
+        password: [
+          { required: true, trigger: "blur", message: "请输入用户密码" }
+        ]
+      },
+      // 登录按钮加载状态
+      loading: false
     };
   },
-  computed:{
+  computed: {
+    // 改变登录按钮文字
+    loadMsg() {
+      return this.loading ? "正在登录" : "Sign in";
+    }
   },
-  methods:{
-    showPwd(){
+  watch: {},
+  methods: {
+    // 改变密码状态
+    showPwd() {
       this.pwdState = !this.pwdState;
+    },
+    // El 组件内置 validate 验证函数，回调参数（valid：是否校验成功，obj：未通过校验的字段）
+    validateLogin() {
+      this.$refs["loginForm"].validate(valid => {
+        if (valid) {
+          this.loading = true;
+          // 模拟登录
+          setTimeout(() => {
+            this.loading = false;
+          }, 1500);
+        }
+      });
     }
   }
 };
 </script>
 
 <style lang="scss" rel="stylesheet/scss" scoped>
-
 // 登录页背景颜色
 $bg: #2d3a4b;
 // icon颜色
 $icon-color: #889aa4;
-// 输入框颜色
-$ipt-color: #eee;
 // title颜色
 $title-color: #eee;
 
@@ -80,16 +126,16 @@ $title-color: #eee;
       margin: 0 auto 40px auto;
       text-align: center;
     }
-    .svg-container{
+    .svg-container {
       line-height: 45px;
       font-size: 1.5rem;
       padding-left: 15px;
-      color:rgba($color: #fff, $alpha: .3)
+      color: rgba($color: $icon-color, $alpha: 0.3);
     }
-    .show-pwd{
+    .show-pwd {
       line-height: 47px;
       font-size: 1.3rem;
-      color: rgba($color: #fff, $alpha: .5);
+      color: rgba($color: $icon-color, $alpha: 0.5);
       width: 50px;
       text-align: center;
     }
@@ -98,28 +144,29 @@ $title-color: #eee;
 </style>
 
 <style rel="stylesheet/scss" lang="scss">
+// 输入框颜色
+$ipt-color: #ccc;
 // 由于使用scoped会导致无法修改第三方样式，所以单独分离出来
 
 /* reset element-ui css */
-.login-container{
-  .el-input {
-    display: inline-block;
-    input {
-      background: transparent;
-      border: 0px;
-      border-radius: 0px;
-      padding: 12px 5px 12px 15px;
-      color: #eee;
-      height: 47px;
-    }
-  }
+.login-container {
   .el-form-item {
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    color: #454545;
     & > div {
       display: flex;
+    }
+    .el-input {
+      display: inline-block;
+      input {
+        background: transparent;
+        border: 0px;
+        border-radius: 0px;
+        padding: 12px 5px 12px 15px;
+        color: $ipt-color;
+        height: 47px;
+      }
     }
   }
   .el-button {
