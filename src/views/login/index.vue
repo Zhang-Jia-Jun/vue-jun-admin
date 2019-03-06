@@ -93,11 +93,10 @@ export default {
             })
             .catch(error => {
               this.loading = false;
-              // 业务状态码，403表示账号密码错误
-              if (error.data == 403) {
+              // 业务状态码，6020表示账号密码错误
+              if (error.code == 6020) {
                 this.$message.error("账号密码错误");
               }
-              console.log(error);
             });
         }
       });

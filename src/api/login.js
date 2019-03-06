@@ -9,7 +9,7 @@ export default {
             url: '/user/login',
             method: 'post',
             data: {
-                
+                username, password
             }
         })
     },
