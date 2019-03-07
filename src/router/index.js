@@ -1,12 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+import Layout from '@/views/layout/index.vue'
+
 Vue.use(Router)
 
 // 基础路由
 export const constantRouterMap = [
   // 登录页
   { path: '/login', component: () => import('@/views/login/index'), hidden: true },
+  // 基础页
+  {
+    path: '/',
+    component: Layout,
+    name:'layout',
+  }
 ]
 // 动态路由
 export const asyncRouterMap = [

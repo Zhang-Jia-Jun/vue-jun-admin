@@ -1,8 +1,25 @@
-// 全局变量定义
+//sidebar 侧边栏样式
+$menuText: #bfcbd9;
+$menuActiveText: #409eff;
+$subMenuActiveText: #f4f4f5; //https://github.com/ElemeFE/element/issues/12951
 
-//sidebar
-$menuText:#bfcbd9;
-$menuActiveText:#409EFF;
+$menuBg: #304156;
+$menuHover: #263445;
 
-$menuBg:#304156;
-$menuHover:#263445;
+$subMenuBg: #1f2d3d;
+$subMenuHover: #001528;
+
+$sideBarWidth: 180px;
+// webpack 的语法糖，留下问题以后解决
+// 导出变量
+:export {
+  menuText: $menuText;
+  menuActiveText: $menuActiveText;
+  menuBg: $menuBg;
+  menuHover: $menuHover;
+
+  subMenuActiveText: $subMenuActiveText;
+  subMenuBg: $subMenuBg;
+  subMenuHover: $subMenuHover;
+  sideBarWidth: $sideBarWidth;
+}

@@ -89,7 +89,7 @@ export default {
             .dispatch("Login", this.loginAccount)
             .then(() => {
               this.loading = false;
-              this.$message.success("登录成功");
+              this.$router.push({name:'layout'})
             })
             .catch(error => {
               this.loading = false;

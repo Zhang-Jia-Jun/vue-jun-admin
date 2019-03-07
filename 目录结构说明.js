@@ -25,3 +25,4 @@
 // ├── favicon.ico                // favicon图标
 // ├── index.html                 // html模板
 // └── package.json               // package.json
+// └── vue.config.js              // vue-cil配置文件
