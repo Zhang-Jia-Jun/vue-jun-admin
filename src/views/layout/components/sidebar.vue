@@ -6,7 +6,7 @@
       :background-color="variables.menuBg"
       :text-color="variables.menuText"
       :active-text-color="variables.menuActiveText"
-      :collapse="isMenuOpen"
+      :collapse="!isMenuOpen"
     >
       <el-submenu index="1">
         <template slot="title">

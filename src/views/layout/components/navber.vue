@@ -1,7 +1,11 @@
 <template>
   <div class="navber">
-    <div class="sidebar-isopen" :class="{'is-active':!this.menuState}">
-      <icon @click.native="toggleMenu()" iconName="menu-state"></icon>
+    <div class="sidebar-isopen">
+      <icon
+        @click.native="toggleMenu()"
+        :class="{'is-active':!this.menuState}"
+        iconName="menu-state"
+      ></icon>
     </div>
   </div>
 </template>
@@ -19,9 +23,9 @@ export default {
       return this.sidebar.opened;
     }
   },
-  methods:{
-    toggleMenu(){
-      this.$store.commit('TOGGLE_SIDEBAR');
+  methods: {
+    toggleMenu() {
+      this.$store.commit("TOGGLE_SIDEBAR");
     }
   }
 };
@@ -38,12 +42,13 @@ export default {
     line-height: 50px;
     padding: 0 10px;
     height: 50px;
-    transform: rotate(180deg);
-    &.is-active {
-      transform: initial;
-    }
     .icon {
+      font-size: 1.3rem;
+      font-weight: bold;
       cursor: pointer;
+      &.is-active {
+        transform: rotate(180deg);
+      }
     }
   }
 }
