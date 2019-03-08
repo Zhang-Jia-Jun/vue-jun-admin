@@ -1,15 +1,14 @@
 <template>
-    <div class="appMain">
-        1
-    </div>
+  <div class="appMain">
+    <transition name="fade-transform" mode="out-in">
+      <router-view/>
+    </transition>
+  </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style>
-
 </style>
