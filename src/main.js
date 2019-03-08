@@ -22,6 +22,9 @@ import './icons'
 // 引入mockjs,拦截请求,模拟数据
 import '../mock'
 
+// 引入animate.css动画效果
+import 'animate.css';
+
 
 Vue.config.productionTip = false
 
