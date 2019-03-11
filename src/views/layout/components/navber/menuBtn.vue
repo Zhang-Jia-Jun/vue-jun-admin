@@ -1,7 +1,7 @@
 <template>
   <!-- Menu 打开关闭按钮 -->
   <div class="sidebar-isopen">
-    <icon @click.native="toggleMenu()" :class="{'is-active':this.menuState}" iconName="menu-state"></icon>
+    <icon @click.native="toggleMenu()" :class="{'is-active':!this.menuState}" iconName="menu-state"></icon>
   </div>
 </template>
 

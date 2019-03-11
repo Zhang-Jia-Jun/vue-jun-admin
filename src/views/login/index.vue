@@ -96,6 +96,8 @@ export default {
               // 业务状态码，6020表示账号密码错误
               if (error.code == 6020) {
                 this.$message.error("账号密码错误");
+              }else{
+                this.$message.error("未知错误，请联系管理员")
               }
             });
         }

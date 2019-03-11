@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 
+import { getToken } from "../utils/auth";
+import NProgress from "nprogress";
 import Layout from "@/views/layout/index.vue";
 
 Vue.use(Router);
@@ -11,6 +13,16 @@ export const constantRouterMap = [
   {
     path: "/login",
     component: () => import("@/views/login/index"),
+    beforeEnter(to, from, next) {
+      // 登录的用户，跳转去首页
+      if (getToken()) {
+        // 导航终止，会导致进度条结束失败，必须在这里手动结束
+        next({ path: "/" });
+        NProgress.done();
+      } else {
+        next();
+      }
+    },
     hidden: true
   },
   // 404页面
@@ -20,19 +32,29 @@ export const constantRouterMap = [
     // 先进入布局页
     path: "/",
     component: Layout,
+    // 未登录的用户，跳转去登录页面
+    beforeEnter(to, from, next) {
+      if (!getToken()) {
+        // 导航终止，会导致进度条结束失败，必须在这里手动结束
+        next({ path: "/login" });
+        NProgress.done();
+      } else {
+        next();
+      }
+    },
     children: [
       {
         // 进入默认页面
         path: "/",
         component: () => import("@/views/default/index"),
-        meta:{
+        meta: {
           // 路由头信息
-          title:"首页"
+          title: "首页"
         }
       },
       {
-        path:'*',
-        redirect:'/404'
+        path: "*",
+        redirect: "/404"
       }
     ]
   },

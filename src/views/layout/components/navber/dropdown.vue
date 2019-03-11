@@ -10,10 +10,8 @@
       <router-link to="/" tag="span">
         <el-dropdown-item>首页</el-dropdown-item>
       </router-link>
-      <el-dropdown-item>切换账户</el-dropdown-item>
-      <router-link to="/login" tag="span">
-        <el-dropdown-item divided>退出系统</el-dropdown-item>
-      </router-link>
+      <el-dropdown-item @click.native="logOut()">切换账户</el-dropdown-item>
+      <el-dropdown-item divided>退出系统</el-dropdown-item>
     </el-dropdown-menu>
   </el-dropdown>
 </template>
@@ -31,6 +29,10 @@ export default {
   methods: {
     resetHeadPortrait(event) {
       event.target.src = defaultheadPortrait;
+    },
+    logOut() {
+      this.$store.dispatch("LogOut");
+      this.$router.push("/login");
     }
   }
 };

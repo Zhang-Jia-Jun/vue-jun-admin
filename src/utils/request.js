@@ -6,7 +6,7 @@ import store from '../store'
 // 创建 axios 实例
 const service = axios.create({
     // 项目的根路径
-    baseURL: process.env.BASE_API,
+    baseURL: 'http://rest.apizza.net/mock/dbb28c3d1d69ee2fc1c12a7791df45d5/',
     // 请求5秒超时
     timeout: 5000
 })

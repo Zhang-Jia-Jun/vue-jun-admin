@@ -7,7 +7,8 @@ const getters = {
   // 用户名称
   name: state => state.user.name,
   // 用户路由表
-  // permission_routers: state => state.user_permisstion
+  user_routers: state => state.user_routers,
+  // 用户头像
   headPortrait: state => state.user.headPortrait
 };
 export default getters;

@@ -6,7 +6,7 @@
       :background-color="variables.menuBg"
       :text-color="variables.menuText"
       :active-text-color="variables.menuActiveText"
-      :collapse="!isMenuOpen"
+      :collapse="isMenuOpen"
     >
       <el-menu-item index="1">
         <i class="el-icon-location"></i>
