@@ -18,3 +18,10 @@ body,html,#app{
     // 所有元素都继承父级 盒模式
   box-sizing: inherit;
 }
+
+img{
+  vertical-align: middle;
+}
+.el-dropdown-menu{
+  overflow: initial;
+}

@@ -20,7 +20,6 @@ export const constantRouterMap = [
     // 先进入布局页
     path: "/",
     component: Layout,
-    name: "layout",
     children: [
       {
         // 进入默认页面

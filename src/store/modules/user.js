@@ -9,7 +9,8 @@ const user = {
         // 用户token密匙
         token: '',
         // 用户名
-        name: '',
+        name: 'default',
+        headPortrait:'/'
     },
     // 操作状态
     mutations: {

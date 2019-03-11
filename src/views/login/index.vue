@@ -89,7 +89,7 @@ export default {
             .dispatch("Login", this.loginAccount)
             .then(() => {
               this.loading = false;
-              this.$router.push({name:'layout'})
+              this.$router.push('/')
             })
             .catch(error => {
               this.loading = false;
