@@ -81,25 +81,21 @@ export default {
     },
     // El 组件内置 validate 验证函数，回调参数（valid：是否校验成功，obj：未通过校验的字段）
     validateLogin() {
-      this.$refs["loginForm"].validate(valid => {
+      this.$refs["loginForm"].validate(async valid => {
+        this.loading = true;
         if (valid) {
-          this.loading = true;
-          // 模拟登录
-          this.$store
-            .dispatch("Login", this.loginAccount)
-            .then(() => {
-              this.loading = false;
-              this.$router.push('/')
-            })
-            .catch(error => {
-              this.loading = false;
-              // 业务状态码，6020表示账号密码错误
-              if (error.code == 6020) {
-                this.$message.error("账号密码错误");
-              }else{
-                this.$message.error("未知错误，请联系管理员")
-              }
-            });
+          try {
+            await this.$store.dispatch("Login", this.loginAccount); // 模拟登录
+            this.$router.push("/");
+          } catch (error) {
+            console.error(error);
+            // 业务状态码，6020表示账号密码错误
+            if (error.code == 6020) {
+              this.$message.error("账号密码错误");
+            }
+          } finally {
+            this.loading = false; //不管成功与否，都关闭加载
+          }
         }
       });
     }

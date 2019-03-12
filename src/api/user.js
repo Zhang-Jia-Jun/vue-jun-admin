@@ -13,18 +13,18 @@ export default {
       }
     });
   },
-  // 获取用户权限表
-  getPermissionTable() {
-    return request({
-      url: "/user/permission",
-      method: "post"
-    });
-  },
-  // 根据token获取用户信息
+  // 获取用户信息
   getInfo() {
     return request({
       url: "/user/info",
-      method: "get"
+      method: "post"
+    });
+  },
+  // 获取用户路由表
+  getRouter() {
+    return request({
+      url: "/user/router",
+      method: "post"
     });
   },
   // 退出账号

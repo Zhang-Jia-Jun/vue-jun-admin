@@ -20,10 +20,8 @@ import router from "./router";
 import store from "./store";
 // 进度条插件
 import "./nprogress";
-// 初始化权限表
-import "./permission";
-// // 引入mockjs,拦截请求,模拟数据
-// import "../mock"; // 已使用 apizza 替代
+// 认证用户状态
+import "./authUser";
 
 Vue.config.productionTip = false;
 

@@ -1,8 +1,5 @@
 import Vue from "vue";
 import Router from "vue-router";
-
-import { getToken } from "../utils/auth";
-import NProgress from "nprogress";
 import Layout from "@/views/layout/index.vue";
 
 Vue.use(Router);
@@ -13,35 +10,18 @@ export const constantRouterMap = [
   {
     path: "/login",
     component: () => import("@/views/login/index"),
-    beforeEnter(to, from, next) {
-      // 登录的用户，跳转去首页
-      if (getToken()) {
-        // 导航终止，会导致进度条结束失败，必须在这里手动结束
-        next({ path: "/" });
-        NProgress.done();
-      } else {
-        next();
-      }
-    },
     hidden: true
   },
   // 404页面
-  { path: "/404", component: () => import("@/views/404"), hidden: true },
+  { path: "/404", component: () => import("@/views/404"), hidden: true }
+];
+// 应用程序路由表 动态路由
+export const asyncRouterMap = [
   // 基础页
   {
     // 先进入布局页
     path: "/",
     component: Layout,
-    // 未登录的用户，跳转去登录页面
-    beforeEnter(to, from, next) {
-      if (!getToken()) {
-        // 导航终止，会导致进度条结束失败，必须在这里手动结束
-        next({ path: "/login" });
-        NProgress.done();
-      } else {
-        next();
-      }
-    },
     children: [
       {
         // 进入默认页面
@@ -53,15 +33,64 @@ export const constantRouterMap = [
         }
       },
       {
-        path: "*",
-        redirect: "/404"
+        path: "/nested",
+        name: "Nested",
+        meta: {
+          title: "Nested",
+          icon: "nested"
+        },
+        children: [
+          {
+            path: "menu1",
+            component: () => import("@/views/nested/menu1/index"), // Parent router-view
+            name: "Menu1",
+            meta: { title: "Menu1" },
+            children: [
+              {
+                path: "menu1-1",
+                component: () => import("@/views/nested/menu1/menu1-1"),
+                name: "Menu1-1",
+                meta: { title: "Menu1-1" }
+              },
+              {
+                path: "menu1-2",
+                component: () => import("@/views/nested/menu1/menu1-2"),
+                name: "Menu1-2",
+                meta: { title: "Menu1-2" },
+                children: [
+                  {
+                    path: "menu1-2-1",
+                    component: () =>
+                      import("@/views/nested/menu1/menu1-2/menu1-2-1"),
+                    name: "Menu1-2-1",
+                    meta: { title: "Menu1-2-1" }
+                  },
+                  {
+                    path: "menu1-2-2",
+                    component: () =>
+                      import("@/views/nested/menu1/menu1-2/menu1-2-2"),
+                    name: "Menu1-2-2",
+                    meta: { title: "Menu1-2-2" }
+                  }
+                ]
+              },
+              {
+                path: "menu1-3",
+                component: () => import("@/views/nested/menu1/menu1-3"),
+                name: "Menu1-3",
+                meta: { title: "Menu1-3" }
+              }
+            ]
+          },
+          {
+            path: "menu2",
+            component: () => import("@/views/nested/menu2/index"),
+            meta: { title: "menu2" }
+          }
+        ]
       }
     ]
   },
-  { path: "*", redirect: "/404" }
-];
-// 动态路由
-export const asyncRouterMap = [
   // 404页面必须在动态路由的最后一项实例中
   { path: "*", redirect: "/404", hidden: true }
 ];

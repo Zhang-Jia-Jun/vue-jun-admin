@@ -1,5 +1,14 @@
 // 用户路由store
 import { constantRouterMap, asyncRouterMap } from "@/router";
+import userAPI from "../../api/user";
+
+
+function filterAsyncRouter(router,roles){
+  const res = [];
+
+  router
+}
+
 
 const permisstion = {
   state: {
@@ -11,17 +20,16 @@ const permisstion = {
   mutations: {
     // 设置路由表
     SET_ROUTERS(state, routers) {
+      state.routers = [...state.routers, ...routers];
       state.addRouters = routers;
-      state.routers = [...constantRouterMap, ...routers];
     }
   },
   actions: {
     // 生成路由
-    GenerateRoutes({ commit }, data) {
-      return new Promise((resolve, reject) => {
-        commit("SET_ROUTERS", data);
-        resolve();
-      });
+    async GenerateRoutes({ commit, state }) {
+      const data = await userAPI.getRouter();
+      commit("SET_ROUTERS",asyncRouterMap)
+      return state.addRouters;
     }
   }
 };
