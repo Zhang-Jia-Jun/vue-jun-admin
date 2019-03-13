@@ -6,14 +6,14 @@
       <!-- prop特性，该组件所要验证的属性 -->
       <el-form-item prop="username">
         <span class="svg-container">
-          <icon icon-name="people_fill"></icon>
+          <icon iconName="people_fill"></icon>
         </span>
 
         <el-input placeholder="用户账号" name="username" v-model="loginAccount.username"></el-input>
       </el-form-item>
       <el-form-item prop="password">
         <span class="svg-container">
-          <icon icon-name="lock_fill"></icon>
+          <icon iconName="lock_fill"></icon>
         </span>
         <el-input
           placeholder="用户密码"
@@ -23,7 +23,7 @@
           @keyup.enter.native="validateLogin()"
         ></el-input>
         <span class="show-pwd" @click="showPwd()">
-          <icon :icon-name="this.pwdState ? 'eye':'eye-close'"></icon>
+          <icon :iconName="this.pwdState ? 'eye':'eye-close'"></icon>
         </span>
       </el-form-item>
       <el-form-item>
