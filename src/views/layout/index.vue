@@ -1,17 +1,17 @@
 <template>
   <!-- 布局页面 -->
   <el-container class="layout">
-    <el-aside width='initial'>
-        <!-- 侧边栏 -->
+    <el-aside width="initial">
+      <!-- 侧边栏 -->
       <sideber></sideber>
     </el-aside>
     <el-container>
-      <el-header height='50px'>
-          <!-- 导航栏 -->
+      <el-header height="50px">
+        <!-- 导航栏 -->
         <navber></navber>
       </el-header>
       <el-main>
-          <!-- 主体内容 -->
+        <!-- 主体内容 -->
         <appMain></appMain>
       </el-main>
     </el-container>
@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import appMain from "./components/appMain";
-import navber from "./components/navber";
-import sideber from "./components/sidebar";
+import appMain from "./appMain";
+import navber from "./navber";
+import sideber from "./sidebar";
 export default {
   data() {
     return {};
@@ -41,10 +41,11 @@ export default {
 }
 </style>
 <style lang='scss'>
-.layout{
-    .el-header,.el-main{
-        padding: 0;
-    }
+.layout {
+  .el-header,
+  .el-main {
+    padding: 0;
+  }
 }
 </style>
 

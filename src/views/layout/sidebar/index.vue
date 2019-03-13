@@ -31,7 +31,7 @@ export default {
   computed: {
     ...mapGetters([
       // 用户授权表
-      "permission_routers",
+      "user_routers",
       // 侧边栏状态
       "sidebar"
     ]),
