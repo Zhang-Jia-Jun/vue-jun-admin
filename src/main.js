@@ -22,9 +22,10 @@ import store from "./store";
 import "./nprogress";
 // 认证用户状态
 import "./authUser";
+// enum挂载到vue中
+import "./enum"
 
 Vue.config.productionTip = false;
-
 new Vue({
   router,
   store,

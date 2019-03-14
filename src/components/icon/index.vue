@@ -11,7 +11,7 @@ export default {
     //  使用icon的图标类型
     iconName: {
       type: String,
-      required: true
+      required: true,
     },
     // 是否添加class样式
     className: {

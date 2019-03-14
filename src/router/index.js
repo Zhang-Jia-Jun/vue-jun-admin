@@ -8,7 +8,7 @@ Vue.use(Router);
  *  hidden:true             在侧边栏中隐藏
  *  title:"index"           面包屑标题
  *  icon:"scg-name"         侧边栏图标
- *
+ *  breadcrumbHidden:true   在面包屑中隐藏
  * }
  *  */
 
@@ -94,9 +94,9 @@ export const asyncRouterMap = [
             ]
           },
           {
-            path: "menu2",
+            path: "Menu2",
             component: () => import("@/views/nested/menu2/index"),
-            meta: { title: "menu2" }
+            meta: { title: "Menu2" }
           }
         ]
       }

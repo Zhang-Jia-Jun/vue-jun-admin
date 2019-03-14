@@ -2,8 +2,8 @@
   <!-- 滚动条组件，element-UI 文档没有说明 -->
   <el-scrollbar>
     <el-menu
-      :router="true"
       class="sidebar"
+      :router="true"
       :background-color="variables.menuBg"
       :text-color="variables.menuText"
       :active-text-color="variables.menuActiveText"
@@ -43,7 +43,7 @@ export default {
     router() {
       // 获得布局页中的路由,并且设置为显示状态
       return this.user_routers.find(item => {
-        return item.path == "/";
+        return item.path == this.$enum.indexPath;
       }).children;
     }
   }

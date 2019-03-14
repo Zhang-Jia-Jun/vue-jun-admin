@@ -3,16 +3,16 @@
   <!-- 设置index选项为绝对路径，会根据该选项进行路由跳转 -->
   <el-menu-item v-if="!hasChildren()" :index="resolvePath(Item.path)">
     <!-- 如果有图标，则显示图标 -->
-    <icon v-if="Item.meta.icon" :iconName="Item.meta.icon" class="sidebarIcon"/>
+    <icon v-if="Meta && Meta.icon" :iconName="Item.meta.icon" class="sidebarIcon"/>
     <!-- 显示标题 -->
-    <span class="title">{{Item.meta.title}}</span>
+    <span class="title">{{Meta ? Meta.title:"" }}</span>
   </el-menu-item>
 
   <el-submenu v-else :index="Item.path" class="nest-menu">
     <!-- 进入多选栏，设置标题和图标 -->
     <template slot="title">
-      <icon v-if="Item.meta.icon" :iconName="Item.meta.icon" class="sidebarIcon"/>
-      <span class="title">{{Item.meta.title}}</span>
+      <icon v-if="Meta && Meta.icon" :iconName="Item.meta.icon" class="sidebarIcon"/>
+      <span class="title">{{Meta ? Meta.title:"" }}</span>
     </template>
     <!-- 递归组件，传入相对当前的路径 -->
     <sidebarItem
@@ -34,19 +34,20 @@ export default {
     // 基础路径
     basePath: String
   },
-  created() {},
-  computed: {},
+  computed: {
+    Meta() {
+      return this.Item.meta;
+    }
+  },
   methods: {
     //  将item的路径地址解析成绝对路径
     resolvePath(url) {
-        // 当item不存在子路径时，表示已经不需要再记录路径，直接使用basePath就好了
-        if(this.hasChildren()){
-            console.log(path.resolve(this.basePath, url))
-            return path.resolve(this.basePath, url);
-        }else{
-            console.log(this.basePath)
-            return this.basePath;
-        }
+      // 当item不存在子路径时，表示已经不需要再记录路径，直接使用basePath就好了
+      if (this.hasChildren()) {
+        return path.resolve(this.basePath, url);
+      } else {
+        return this.basePath;
+      }
     },
     // 判断是否子路径
     hasChildren() {

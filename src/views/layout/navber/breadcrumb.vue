@@ -31,23 +31,15 @@ export default {
     this.initLevelList();
   },
   methods: {
-    randomIndex: function() {
-      return Math.floor(Math.random() * this.levelList.length);
-    },
-    add() {
-      this.levelList.push({
-        meta: { title: "text" },
-        path: Math.random() * 100 + 1
-      });
-      console.log(this.levelList);
-    },
-    del() {
-      this.levelList.pop();
-    },
-    // 初始化面包屑
+    // 初始化面包屑 $route.matched 用于从根路由开始匹配到的所有路由记录，常用于面包屑
     initLevelList() {
+      const matached = this.$route.matched.filter(item => item.meta && item.meta.title && !item.meta.breadcrumbHidden)
+      if(this.$route.path !== this.$enum.indexPath){
+        matached.splice(0,0,{path:this.$enum.indexPath,meta:{title:this.$enum.title}})
+      }
+      console.log(matached,this.$route)
       // 筛选出路由中带有 mate.title 的路径
-      this.levelList = this.$route.matched.filter(item => item.meta.title);
+      this.levelList = matached;
     }
   }
 };
